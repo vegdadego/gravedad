@@ -248,20 +248,10 @@ class _GameScreenState extends State<GameScreen> {
         children: [
           GameWidget(
             game: game,
-            overlayBuilderMap: {
-              'victory': (context, game) => _buildOverlay(
-                    context,
-                    '¡Victoria! 🎉',
-                    Colors.green,
-                    'Has eliminado todos los enemigos',
-                  ),
-              'defeat': (context, game) => _buildOverlay(
-                    context,
-                    'Sin disparos 😔',
-                    Colors.red,
-                    'Te quedaste sin intentos',
-                  ),
-            },
+        overlayBuilderMap: {
+          'victory': (context, game) => _buildVictoryOverlay(context, game as MyPhysicsGame),
+          'defeat': (context, game) => _buildDefeatOverlay(context, game as MyPhysicsGame),
+        },
           ),
           // Botón de regreso
           Positioned(
@@ -313,87 +303,205 @@ class _GameScreenState extends State<GameScreen> {
     );
   }
 
-  Widget _buildOverlay(
-    BuildContext context,
-    String title,
-    Color color,
-    String subtitle,
-  ) {
+  Widget _buildVictoryOverlay(BuildContext context, MyPhysicsGame gameInstance) {
+    final stars = gameInstance.getStars();
+    final score = gameInstance.scoreManager.score;
+    
     return Center(
-      child: Container(
-        padding: const EdgeInsets.all(40),
-        decoration: BoxDecoration(
-          color: Colors.black87,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: color, width: 3),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 48,
-                fontWeight: FontWeight.bold,
-                color: color,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              subtitle,
-              style: const TextStyle(
-                fontSize: 20,
-                color: Colors.white70,
-              ),
-            ),
-            const SizedBox(height: 30),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ElevatedButton.icon(
-                  onPressed: _goBack,
-                  icon: const Icon(Icons.home, size: 24),
-                  label: const Text(
-                    'Menú',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey.shade700,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 30,
-                      vertical: 18,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
+      child: SingleChildScrollView(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 450),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: Colors.black87,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Colors.green, width: 2),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                '¡Victoria! 🎉',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
                 ),
-                const SizedBox(width: 20),
-                ElevatedButton.icon(
-                  onPressed: _restartGame,
-                  icon: const Icon(Icons.refresh, size: 28),
-                  label: const Text(
-                    'Reiniciar',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: color,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 40,
-                      vertical: 20,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
+              ),
+              const SizedBox(height: 12),
+              // Estrellas
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(3, (i) {
+                  return Icon(
+                    i < stars ? Icons.star : Icons.star_border,
+                    color: Colors.yellowAccent,
+                    size: 36,
+                  );
+                }),
+              ),
+              const SizedBox(height: 12),
+              // Puntuación
+              Text(
+                '$score pts',
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.yellowAccent,
                 ),
-              ],
-            ),
-          ],
+              ),
+              const SizedBox(height: 6),
+              Text(
+                'Enemigos: ${gameInstance.scoreManager.enemiesDestroyed}',
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.white70,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: _goBack,
+                    icon: const Icon(Icons.home, size: 18),
+                    label: const Text(
+                      'Menú',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey.shade700,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 12,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  ElevatedButton.icon(
+                    onPressed: _restartGame,
+                    icon: const Icon(Icons.refresh, size: 20),
+                    label: const Text(
+                      'Reiniciar',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 14,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+  
+  Widget _buildDefeatOverlay(BuildContext context, MyPhysicsGame gameInstance) {
+    final score = gameInstance.scoreManager.score;
+    
+    return Center(
+      child: SingleChildScrollView(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 450),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: Colors.black87,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Colors.red, width: 2),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Sin disparos 😔',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                'Puntos: $score',
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.yellowAccent,
+                ),
+              ),
+              const SizedBox(height: 6),
+              const Text(
+                'Te quedaste sin intentos',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.white70,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: _goBack,
+                    icon: const Icon(Icons.home, size: 18),
+                    label: const Text(
+                      'Menú',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey.shade700,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 12,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  ElevatedButton.icon(
+                    onPressed: _restartGame,
+                    icon: const Icon(Icons.refresh, size: 20),
+                    label: const Text(
+                      'Reintentar',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 14,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  
 }

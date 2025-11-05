@@ -13,6 +13,7 @@ import 'enemy.dart';
 import 'ground.dart';
 import 'level.dart';
 import 'player.dart';
+import 'score_manager.dart';
 
 class MyPhysicsGame extends Forge2DGame {
   MyPhysicsGame({
@@ -31,6 +32,10 @@ class MyPhysicsGame extends Forge2DGame {
   late final XmlSpriteSheet elements;
   late final XmlSpriteSheet tiles;
   late final AudioManager audioManager;
+  final ScoreManager scoreManager = ScoreManager();
+  
+  // Screen shake
+  double _shakeIntensity = 0;
 
   @override
   FutureOr<void> onLoad() async {
@@ -175,10 +180,28 @@ class MyPhysicsGame extends Forge2DGame {
   );
 
   TextComponent? _shotsCounter;
+  TextComponent? _scoreDisplay;
   
   @override
   void update(double dt) {
     super.update(dt);
+    
+    // Actualizar screen shake
+    if (_shakeIntensity > 0) {
+      _shakeIntensity -= dt * 2;
+      
+      if (_shakeIntensity <= 0) {
+        _shakeIntensity = 0;
+        camera.viewfinder.position = Vector2.zero();
+      } else {
+        final shakeX = (Random().nextDouble() - 0.5) * _shakeIntensity * 2;
+        final shakeY = (Random().nextDouble() - 0.5) * _shakeIntensity * 2;
+        camera.viewfinder.position = Vector2(shakeX, shakeY);
+      }
+    }
+    
+    // Actualizar display de puntos
+    _updateScoreDisplay();
     
     // Agregar nuevo jugador si no hay ninguno y aún quedan intentos
     if (isMounted &&
@@ -210,8 +233,7 @@ class MyPhysicsGame extends Forge2DGame {
   }
   
   void _updateShotsCounter() {
-    final remaining = maxPlayers - _playersUsed;
-    final text = 'Disparos: $_playersUsed/$maxPlayers (Quedan: $remaining)';
+    final text = '$_playersUsed/$maxPlayers 🎯';
     
     if (_shotsCounter != null) {
       _shotsCounter!.text = text;
@@ -219,27 +241,61 @@ class MyPhysicsGame extends Forge2DGame {
       _shotsCounter = TextComponent(
         text: text,
         anchor: Anchor.topLeft,
-        position: Vector2(
-          camera.visibleWorldRect.left + 5,
-          camera.visibleWorldRect.top + 5,
-        ),
+        position: Vector2(10, 10),
         textRenderer: TextPaint(
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 12,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
             shadows: [
               Shadow(
                 color: Colors.black,
-                offset: Offset(1, 1),
-                blurRadius: 2,
+                offset: Offset(2, 2),
+                blurRadius: 4,
               ),
             ],
           ),
         ),
       );
-      world.add(_shotsCounter!);
+      camera.viewport.add(_shotsCounter!);
     }
+  }
+  
+  void _updateScoreDisplay() {
+    final text = '⭐ ${scoreManager.score}';
+    
+    if (_scoreDisplay != null) {
+      _scoreDisplay!.text = text;
+    } else {
+      _scoreDisplay = TextComponent(
+        text: text,
+        anchor: Anchor.topRight,
+        position: Vector2(
+          camera.visibleWorldRect.width - 10,
+          10,
+        ),
+        textRenderer: TextPaint(
+          style: const TextStyle(
+            color: Colors.yellowAccent,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            shadows: [
+              Shadow(
+                color: Colors.black,
+                offset: Offset(2, 2),
+                blurRadius: 4,
+              ),
+            ],
+          ),
+        ),
+      );
+      camera.viewport.add(_scoreDisplay!);
+    }
+  }
+  
+  /// Agregar efecto de screen shake
+  void addScreenShake({double intensity = 0.5}) {
+    _shakeIntensity = (_shakeIntensity + intensity).clamp(0, 1.0);
   }
 
   var enemiesFullyAdded = false;
@@ -251,6 +307,10 @@ class MyPhysicsGame extends Forge2DGame {
     _victoryScreenShown = true;
     
     overlays.add('victory');
+  }
+  
+  int getStars() {
+    return scoreManager.calculateStars(_playersUsed, maxPlayers);
   }
 
   void _showDefeatScreen() {

@@ -5,6 +5,8 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
 
 import 'body_component_with_user_data.dart';
+import 'game.dart';
+import 'particle_effect.dart';
 
 const enemySize = 5.0;
 
@@ -60,10 +62,39 @@ class Enemy extends BodyComponentWithUserData with ContactCallbacks {
             .abs();
     // Reducido de 35 a 20 para hacerlo mucho más fácil
     if (interceptVelocity > 20) {
+      // Crear efecto de partículas antes de eliminar
+      if (parent?.parent is MyPhysicsGame) {
+        final game = parent!.parent! as MyPhysicsGame;
+        game.world.add(
+          ParticleEffect(
+            position: position.clone(),
+            color: _getEnemyColor(),
+            particleCount: 25,
+            explosionRadius: 4.0,
+          ),
+        );
+        
+        // Agregar puntos
+        game.scoreManager.addEnemyDestroyed();
+        
+        // Screen shake
+        game.addScreenShake(intensity: 0.3);
+      }
+      
       removeFromParent();
     }
 
     super.beginContact(other, contact);
+  }
+  
+  Color _getEnemyColor() {
+    // Obtener color basado en el sprite del enemigo
+    final spriteComponent = children.whereType<SpriteComponent>().firstOrNull;
+    if (spriteComponent != null) {
+      // Aproximar color según el tipo de alien
+      return Colors.greenAccent; // Color por defecto
+    }
+    return Colors.white;
   }
 
   @override
