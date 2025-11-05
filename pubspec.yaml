@@ -13,6 +13,7 @@ dependencies:
   flame: ^1.33.0
   flame_forge2d: ^0.19.2+1
   flame_kenney_xml: ^0.1.1+17
+  flutter_soloud: ^2.0.7
   xml: ^6.6.1
   equatable: ^2.0.7
 
@@ -20,9 +21,27 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
   assets:
     - assets/
     - assets/images/
+    - sounds/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  web:
+    generate: true
+  windows:
+    generate: true
+  macos:
+    generate: true
+  linux:
+    generate: true
+  image_path: "icons/icon.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "icons/icon.png"
+  remove_alpha_ios: true

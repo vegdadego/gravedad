@@ -1,0 +1,41 @@
+La estructura de archivos debe verse así:
+
+sounds/
+├── background.mp3          ← TU ARCHIVO DE MÚSICA (FALTA)
+├── gunshot.mp3             ← TU ARCHIVO DE SONIDO (FALTA)
+├── README.md               ✓
+├── INSTRUCCIONES_RAPIDAS.md ✓
+├── ARCHIVOS_NECESARIOS.txt  ✓
+├── descargar_audio_ejemplo.ps1 ✓
+└── ejemplo_estructura.txt   ✓ (este archivo)
+
+
+IMPORTANTE:
+===========
+
+Los nombres de archivo DEBEN ser exactamente:
+  - background.mp3  (todo en minúsculas, sin espacios)
+  - gunshot.mp3     (todo en minúsculas, sin espacios)
+
+Los archivos DEBEN estar en formato MP3 (o OGG/WAV renombrado a .mp3)
+
+Los archivos DEBEN estar directamente en la carpeta sounds/
+  ✓ CORRECTO: sounds/background.mp3
+  ✗ INCORRECTO: sounds/musica/background.mp3
+  ✗ INCORRECTO: sounds/Background.mp3 (mayúscula)
+  ✗ INCORRECTO: sounds/background music.mp3 (con espacio)
+
+
+¿DÓNDE CONSEGUIR ARCHIVOS?
+===========================
+
+Opción rápida (audio libre de derechos):
+1. Pixabay Music: https://pixabay.com/music/
+2. Pixabay Sound Effects: https://pixabay.com/sound-effects/
+
+También puedes ejecutar el script:
+  cd sounds
+  .\descargar_audio_ejemplo.ps1
+
+(El script descarga audio de ejemplo automáticamente)
+

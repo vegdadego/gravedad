@@ -247,20 +247,23 @@ Map<BrickDamage, String> brickFileNames(BrickType type, BrickSize size) {
   };
 }
 
-class Brick extends BodyComponentWithUserData {
+class Brick extends BodyComponentWithUserData with ContactCallbacks {
   Brick({
     required this.type,
     required this.size,
     required BrickDamage damage,
     required Vector2 position,
     required Map<BrickDamage, Sprite> sprites,
+    this.isStatic = false, // Por defecto dinámico (modo aleatorio)
   }) : _damage = damage,
        _sprites = sprites,
        super(
          renderBody: false,
          bodyDef: BodyDef()
            ..position = position
-           ..type = BodyType.dynamic,
+           ..type = BodyType.dynamic // Siempre dinámico
+           ..fixedRotation = isStatic // Evitar rotación excesiva en estáticos
+           ..bullet = false,
          fixtureDefs: [
            FixtureDef(
                PolygonShape()..setAsBoxXY(
@@ -279,6 +282,8 @@ class Brick extends BodyComponentWithUserData {
   final BrickType type;
   final BrickSize size;
   final Map<BrickDamage, Sprite> _sprites;
+  final bool isStatic; // Indica si el bloque empieza "dormido"
+  bool _awake = false; // Controla si el bloque está despierto
 
   BrickDamage _damage;
   BrickDamage get damage => _damage;
@@ -297,7 +302,47 @@ class Brick extends BodyComponentWithUserData {
       position: Vector2(0, 0),
     );
     add(_spriteComponent);
+    
+    // Si es un bloque "estático", ponerlo a dormir inicialmente
+    if (isStatic) {
+      Future.microtask(() {
+        body.setAwake(false);
+        _awake = false;
+      });
+    } else {
+      _awake = true;
+    }
+    
     return super.onLoad();
+  }
+
+  @override
+  void beginContact(Object other, Contact contact) {
+    super.beginContact(other, contact);
+    
+    // Si el bloque está dormido y recibe un impacto, despertarlo
+    if (isStatic && !_awake) {
+      // Calcular la velocidad del impacto
+      final velocityA = contact.bodyA.linearVelocity;
+      final velocityB = contact.bodyB.linearVelocity;
+      final relativeVelocity = (velocityA - velocityB).length;
+      
+      // Si el impacto es significativo (>3), despertar el bloque
+      if (relativeVelocity > 3) {
+        body.setAwake(true);
+        _awake = true;
+      }
+    }
+  }
+  
+  @override
+  void update(double dt) {
+    super.update(dt);
+    
+    // Si es un bloque "estático" que está dormido, mantenerlo dormido
+    if (isStatic && !_awake && body.isAwake) {
+      body.setAwake(false);
+    }
   }
 }
 

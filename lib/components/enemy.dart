@@ -58,7 +58,8 @@ class Enemy extends BodyComponentWithUserData with ContactCallbacks {
     var interceptVelocity =
         (contact.bodyA.linearVelocity - contact.bodyB.linearVelocity).length
             .abs();
-    if (interceptVelocity > 35) {
+    // Reducido de 35 a 20 para hacerlo mucho más fácil
+    if (interceptVelocity > 20) {
       removeFromParent();
     }
 

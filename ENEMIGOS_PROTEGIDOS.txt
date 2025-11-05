@@ -1,0 +1,285 @@
+╔═══════════════════════════════════════════════════════════════════════╗
+║          ENEMIGOS PROTEGIDOS EN NIVELES MEDIO Y DIFÍCIL               ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+✅ ESTRUCTURAS FORTIFICADAS IMPLEMENTADAS
+
+═══════════════════════════════════════════════════════════════════════
+
+📋 RESUMEN DE CAMBIOS:
+   ───────────────────
+
+   ✅ NIVEL 2 (MEDIO): 11 bloques → Pirámide fortificada
+   ✅ NIVEL 3 (DIFÍCIL): 14 bloques → Fortaleza blindada
+   ✅ Enemigos posicionados en el interior
+   ✅ Múltiples capas de protección
+   ✅ Materiales resistentes estratégicamente colocados
+
+═══════════════════════════════════════════════════════════════════════
+
+🏗️ NIVEL 2 - PIRÁMIDE FORTIFICADA (MEDIO)
+   ══════════════════════════════════════
+
+   ESTRUCTURA VISUAL:
+   
+        [========techo madera========]
+               |          |
+           [piedra]    [piedra]  ← Columnas protectoras
+               |   👾👾   |      ← Enemigos protegidos
+         [madera] [madera]       ← Plataforma enemigos
+              |     |
+         [vidrio] [vidrio]       ← Paredes laterales
+              |     |
+    [m][piedra][piedra][m]       ← Base sólida
+
+   CAPAS DE PROTECCIÓN:
+   ───────────────────
+
+   1️⃣ BASE (4 bloques):
+      • 2 bloques de madera laterales
+      • 2 bloques de PIEDRA centrales (resistentes)
+      • Proporciona estabilidad
+
+   2️⃣ PAREDES LATERALES:
+      • 2 columnas de vidrio (70x140)
+      • Protegen desde los lados
+      • Posición: -4 y +4
+
+   3️⃣ PLATAFORMA ENEMIGOS:
+      • 2 bloques de madera horizontales
+      • Altura: -5.5
+      • Enemigos están SOBRE esta plataforma
+
+   4️⃣ COLUMNAS INTERNAS:
+      • 2 columnas de PIEDRA (70x140)
+      • Protegen a los enemigos desde los lados
+      • Muy resistentes
+
+   5️⃣ TECHO PROTECTOR:
+      • 1 bloque grande de madera (220x70)
+      • Protege desde arriba
+      • Dificulta disparos en arco
+
+   POSICIÓN ENEMIGOS:
+   • X: -1.2 y +1.2 (centrados)
+   • Y: -7 (bien protegidos en el interior)
+
+   TOTAL: 11 BLOQUES
+
+═══════════════════════════════════════════════════════════════════════
+
+🏰 NIVEL 3 - FORTALEZA BLINDADA (DIFÍCIL)
+   ═══════════════════════════════════════
+
+   ESTRUCTURA VISUAL:
+   
+    [====metal====][====metal====]  ← Techo doble de metal
+          |              |
+      [madera]      [madera]         ← Segundo nivel paredes
+          |              |
+      [vidrio]      [vidrio]         ← Columnas centrales
+          |    👾👾👾    |           ← 3 enemigos MUY protegidos
+      [madera]  [madera]             ← Plataforma
+          |              |
+      [piedra]      [piedra]         ← Paredes internas
+          |              |
+    [piedra][metal][piedra]          ← Base blindada
+          |              |
+    [piedra]          [piedra]       ← Torres exteriores
+
+   CAPAS DE PROTECCIÓN:
+   ───────────────────
+
+   1️⃣ TORRES EXTERIORES (2 bloques):
+      • 2 columnas de PIEDRA extra altas (70x220)
+      • Posición: -7 y +7
+      • Primera línea de defensa
+
+   2️⃣ BASE BLINDADA (3 bloques):
+      • 2 bloques de PIEDRA laterales
+      • 1 bloque de METAL central (muy resistente)
+      • Base súper sólida
+
+   3️⃣ PAREDES INTERNAS (2 bloques):
+      • 2 columnas de PIEDRA (70x140)
+      • Posición: -4 y +4
+      • Segunda capa de protección
+
+   4️⃣ PLATAFORMA ENEMIGOS (2 bloques):
+      • 2 bloques de madera horizontales
+      • Altura: -5.5
+      • Enemigos están sobre esta plataforma
+
+   5️⃣ COLUMNAS CENTRALES (2 bloques):
+      • 2 columnas de vidrio (70x140)
+      • Protegen directamente a los enemigos
+      • Posición: -2.5 y +2.5
+
+   6️⃣ SEGUNDO NIVEL PAREDES (2 bloques):
+      • 2 bloques de madera horizontales
+      • Protección adicional lateral
+      • Altura: -8
+
+   7️⃣ TECHO DOBLE DE METAL (2 bloques):
+      • 2 bloques de METAL (220x70)
+      • MUY resistentes
+      • Protección superior máxima
+
+   POSICIÓN ENEMIGOS:
+   • X: -1.5, 0, +1.5 (3 enemigos centrados)
+   • Y: -7 (muy protegidos en múltiples capas)
+
+   TOTAL: 14 BLOQUES
+
+═══════════════════════════════════════════════════════════════════════
+
+📊 COMPARACIÓN DE PROTECCIÓN:
+   ─────────────────────────
+
+   | Nivel    | Bloques | Capas | Materiales      | Dificultad |
+   |----------|---------|-------|-----------------|------------|
+   | Nivel 1  | 4       | 2     | Madera/Vidrio   | ⭐         |
+   | Nivel 2  | 11      | 5     | +Piedra         | ⭐⭐       |
+   | Nivel 3  | 14      | 7     | +Metal          | ⭐⭐⭐     |
+
+═══════════════════════════════════════════════════════════════════════
+
+🎯 ESTRATEGIAS PARA DERROTAR:
+   ──────────────────────────
+
+   NIVEL 2 (MEDIO):
+   ════════════════
+
+   OPCIÓN A - COLAPSO LATERAL:
+   • Destruye las paredes de vidrio laterales
+   • La estructura colapsará hacia los lados
+   • Los enemigos quedarán expuestos
+
+   OPCIÓN B - DESDE ABAJO:
+   • Rompe los bloques de piedra de la base
+   • La plataforma de enemigos caerá
+   • Ataque directo más difícil
+
+   OPCIÓN C - DESDE ARRIBA (AVANZADO):
+   • Disparo en arco alto
+   • Rompe el techo primero
+   • Requiere mucha puntería
+
+   ───────────────────────────────────────────
+
+   NIVEL 3 (DIFÍCIL):
+   ══════════════════
+
+   OPCIÓN A - TORRES EXTERIORES:
+   • Destruye las torres de piedra primero
+   • Debilita la estructura completa
+   • Requiere 2-3 disparos precisos
+
+   OPCIÓN B - PAREDES INTERNAS:
+   • Ataca las paredes de piedra internas
+   • La estructura central colapsará
+   • Más directo pero requiere fuerza
+
+   OPCIÓN C - COLUMNAS DE VIDRIO:
+   • Las columnas de vidrio son el punto débil
+   • Destruirlas hará caer todo lo de arriba
+   • Requiere disparo preciso
+
+   OPCIÓN D - REBOTE (CREATIVO):
+   • Usa el rebote en los bordes
+   • Ataque lateral inesperado
+   • Requiere práctica
+
+═══════════════════════════════════════════════════════════════════════
+
+🔬 ANÁLISIS DE MATERIALES:
+   ───────────────────────
+
+   RESISTENCIA DE MATERIALES:
+
+   Vidrio:     ▓░░░░  (20%) - Muy frágil
+   Madera:     ▓▓░░░  (40%) - Ligero
+   Piedra:     ▓▓▓░░  (60%) - Resistente
+   Metal:      ▓▓▓▓▓  (100%) - Muy resistente
+
+   DISTRIBUCIÓN EN NIVEL 2:
+   • Vidrio: 2 bloques (paredes laterales)
+   • Madera: 5 bloques (base, plataforma, techo)
+   • Piedra: 4 bloques (base central, columnas)
+
+   DISTRIBUCIÓN EN NIVEL 3:
+   • Vidrio: 2 bloques (columnas centrales)
+   • Madera: 4 bloques (plataforma, paredes)
+   • Piedra: 6 bloques (torres, base, paredes)
+   • Metal: 3 bloques (base central, techo doble)
+
+═══════════════════════════════════════════════════════════════════════
+
+💡 VENTAJAS DE LAS NUEVAS ESTRUCTURAS:
+   ────────────────────────────────────
+
+   ✅ PROTECCIÓN REALISTA:
+      • Enemigos realmente protegidos
+      • No se pueden eliminar con 1 disparo
+      • Requiere estrategia
+
+   ✅ MÚLTIPLES CAPAS:
+      • Defensa en profundidad
+      • Destruir una capa no es suficiente
+      • Como en Angry Birds real
+
+   ✅ PUNTOS DÉBILES ESTRATÉGICOS:
+      • Columnas de vidrio son clave
+      • Base tiene puntos críticos
+      • Recompensa la puntería
+
+   ✅ REJUGABILIDAD:
+      • Diferentes estrategias funcionan
+      • Puedes mejorar tu eficiencia
+      • Desafío interesante
+
+═══════════════════════════════════════════════════════════════════════
+
+📏 POSICIONAMIENTO EXACTO:
+   ──────────────────────
+
+   NIVEL 2:
+   ════════
+   Enemigos en Y = -7
+   • Sobre plataforma de madera (Y = -5.5)
+   • Entre columnas de piedra
+   • Bajo techo de madera (Y = -10.5)
+   
+   NIVEL 3:
+   ════════
+   Enemigos en Y = -7
+   • Sobre plataforma de madera (Y = -5.5)
+   • Entre múltiples capas de protección
+   • Bajo techo doble de metal (Y = -10.5)
+
+═══════════════════════════════════════════════════════════════════════
+
+🎮 RESULTADO ESPERADO:
+   ───────────────────
+
+   NIVEL 1: 2-3 disparos (fácil)
+   NIVEL 2: 4-6 disparos (medio)
+   NIVEL 3: 6-8 disparos (difícil)
+
+   Con práctica y estrategia, puedes mejorar estos números.
+
+═══════════════════════════════════════════════════════════════════════
+
+🚀 ¡PRUEBA AHORA!
+
+   flutter run
+
+   Verás:
+   ✅ Nivel 2: Pirámide fortificada con 11 bloques
+   ✅ Nivel 3: Fortaleza blindada con 14 bloques
+   ✅ Enemigos realmente protegidos
+   ✅ Desafío estratégico interesante
+   ✅ Estructuras estables tipo Angry Birds
+
+═══════════════════════════════════════════════════════════════════════
+

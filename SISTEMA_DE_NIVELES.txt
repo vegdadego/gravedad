@@ -1,0 +1,307 @@
+╔═══════════════════════════════════════════════════════════════════════╗
+║              SISTEMA DE NIVELES + REBOTE EN BORDES                    ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+✅ TODAS LAS CARACTERÍSTICAS IMPLEMENTADAS
+
+═══════════════════════════════════════════════════════════════════════
+
+📋 ÍNDICE:
+  1. Sistema de 4 Niveles
+  2. Estructuras Predefinidas (Tipo Angry Birds)
+  3. Rebote del Alien en los Bordes
+  4. Pantalla de Selección de Niveles
+  5. Navegación y Menú
+
+═══════════════════════════════════════════════════════════════════════
+
+1. 🎮 SISTEMA DE 4 NIVELES
+   ────────────────────────
+
+   NIVEL 1: FÁCIL ⭐
+   ├─ Nombre: "Torre simple"
+   ├─ Estructura: Torre baja con 4 bloques
+   ├─ Enemigos: 2
+   ├─ Disparos: 8
+   ├─ Bloques: Solo madera y vidrio
+   └─ Color: Verde
+
+   NIVEL 2: MEDIO ⭐⭐
+   ├─ Nombre: "Pirámide"
+   ├─ Estructura: Pirámide de 3 pisos (6 bloques)
+   ├─ Enemigos: 2
+   ├─ Disparos: 10
+   ├─ Bloques: Madera, vidrio y piedra
+   └─ Color: Naranja
+
+   NIVEL 3: DIFÍCIL ⭐⭐⭐
+   ├─ Nombre: "Fortaleza"
+   ├─ Estructura: Fortaleza compleja (9 bloques)
+   ├─ Enemigos: 3
+   ├─ Disparos: 12
+   ├─ Bloques: Piedra, metal, madera y vidrio
+   └─ Color: Rojo
+
+   NIVEL 4: ALEATORIO 🎲
+   ├─ Nombre: "Sorpresa"
+   ├─ Estructura: Generación aleatoria
+   ├─ Enemigos: 2
+   ├─ Disparos: 10
+   ├─ Bloques: Aleatorios ligeros
+   └─ Color: Morado
+
+═══════════════════════════════════════════════════════════════════════
+
+2. 🏗️ ESTRUCTURAS PREDEFINIDAS (Estilo Angry Birds)
+   ──────────────────────────────────────────────────
+
+   NIVEL 1 - TORRE SIMPLE:
+   
+         [vidrio]
+       [madera]
+       [madera]
+      [madera]
+         👾👾
+   
+   • 4 bloques ligeros
+   • Enemigos en la base
+   • Fácil de derribar
+
+   ─────────────────────────────────────────────
+
+   NIVEL 2 - PIRÁMIDE:
+   
+        [madera]
+      [v] 👾👾 [v]
+   [m] [piedra] [m]
+   
+   • 6 bloques en 3 niveles
+   • Enemigos en el centro
+   • Requiere precisión
+
+   ─────────────────────────────────────────────
+
+   NIVEL 3 - FORTALEZA:
+   
+      [=== metal ===]
+     [v]  👾👾👾  [v]
+     [m] ======== [m]
+   [piedra]    [piedra]
+   [piedra]    [piedra]
+   
+   • 9 bloques en estructura compleja
+   • 3 enemigos protegidos
+   • Torres laterales de piedra
+   • Requiere estrategia
+
+═══════════════════════════════════════════════════════════════════════
+
+3. 🏀 REBOTE DEL ALIEN EN LOS BORDES
+   ────────────────────────────────────
+
+   ✅ El alien REBOTA en lugar de desaparecer
+   ✅ Rebote en borde derecho
+   ✅ Rebote en borde izquierdo
+   ✅ Velocidad reducida al 70% en cada rebote
+   ✅ Solo desaparece si cae muy abajo
+
+   CÓDIGO:
+   ```dart
+   // Rebote en borde derecho
+   if (position.x > borde_derecho) {
+     position.x = borde_derecho;
+     velocidad.x *= -0.7;  // Invierte y reduce
+   }
+   
+   // Rebote en borde izquierdo
+   if (position.x < borde_izquierdo) {
+     position.x = borde_izquierdo;
+     velocidad.x *= 0.7;  // Invierte y reduce
+   }
+   ```
+
+   VENTAJAS:
+   • Más oportunidades de golpear
+   • Más realista físicamente
+   • Estrategias de rebote posibles
+   • Menos frustrante
+
+═══════════════════════════════════════════════════════════════════════
+
+4. 🎨 PANTALLA DE SELECCIÓN DE NIVELES
+   ───────────────────────────────────────
+
+   DISEÑO:
+   ┌──────────────────────────────────────────────────┐
+   │                                                  │
+   │              GRAVEDAD                            │
+   │          Selecciona un nivel                     │
+   │                                                  │
+   │  ┌──────────┐  ┌──────────┐  ┌──────────┐     │
+   │  │   ⭐     │  │   ⭐½    │  │   ⭐     │      │
+   │  │ Nivel 1  │  │ Nivel 2  │  │ Nivel 3  │     │
+   │  │  Fácil   │  │  Medio   │  │ Difícil  │     │
+   │  │  Verde   │  │ Naranja  │  │   Rojo   │     │
+   │  └──────────┘  └──────────┘  └──────────┘     │
+   │                                                  │
+   │              ┌──────────┐                        │
+   │              │    🎲    │                        │
+   │              │Aleatorio │                        │
+   │              │  Morado  │                        │
+   │              └──────────┘                        │
+   └──────────────────────────────────────────────────┘
+
+   CARACTERÍSTICAS:
+   • Fondo con degradado azul-morado
+   • Botones grandes con iconos
+   • Colores distintos por nivel
+   • Animación al presionar
+   • Descripción de estructura
+
+═══════════════════════════════════════════════════════════════════════
+
+5. 🔄 NAVEGACIÓN Y MENÚ
+   ─────────────────────
+
+   FLUJO DE NAVEGACIÓN:
+   
+   [Pantalla Inicio] → Seleccionar Nivel
+         ↓
+   [Pantalla de Juego]
+         ↓
+   [Victoria/Derrota]
+    ├─ Botón "Reiniciar" → Mismo nivel
+    └─ Botón "Menú" → Vuelve a selección
+
+   ELEMENTOS EN PANTALLA DE JUEGO:
+   
+   ┌────────────────────────────────────────┐
+   │ [⭐ Nivel 1: Fácil]    [←]            │ ← Indicadores
+   │                                        │
+   │         [JUEGO AQUÍ]                   │
+   │                                        │
+   │ Disparos: 3/8 (Quedan: 5)             │ ← Contador
+   └────────────────────────────────────────┘
+
+   BOTONES DISPONIBLES:
+   • ← Volver al menú (esquina superior derecha)
+   • 🏠 Menú (en overlay victoria/derrota)
+   • 🔄 Reiniciar (en overlay victoria/derrota)
+
+═══════════════════════════════════════════════════════════════════════
+
+6. 📊 COMPARACIÓN ANTES vs AHORA
+   ─────────────────────────────
+
+   | Característica      | Antes        | Ahora          |
+   |---------------------|--------------|----------------|
+   | Niveles             | 1 (aleatorio)| 4 (3+aleatorio)|
+   | Estructuras         | Aleatorias   | Predefinidas   |
+   | Rebote en bordes    | ❌           | ✅             |
+   | Selección de nivel  | ❌           | ✅             |
+   | Dificultad ajustable| ❌           | ✅ (3 niveles) |
+   | Menú de navegación  | ❌           | ✅             |
+   | Indicador de nivel  | ❌           | ✅             |
+
+═══════════════════════════════════════════════════════════════════════
+
+7. 🎯 CARACTERÍSTICAS TÉCNICAS
+   ──────────────────────────
+
+   ARCHIVOS CREADOS/MODIFICADOS:
+   ✅ lib/components/level.dart (NUEVO)
+      - Enum GameLevel
+      - Clase LevelConfig
+      - Clase BrickConfig
+      - LevelConfigurations con estructuras
+
+   ✅ lib/main.dart (MODIFICADO)
+      - LevelSelectionScreen (pantalla de menú)
+      - _LevelButton (botones de nivel)
+      - GameScreen con navegación
+
+   ✅ lib/components/game.dart (MODIFICADO)
+      - Soporte para niveles
+      - _addStructuredBricks()
+      - _addRandomBricks()
+      - Carga de configuración por nivel
+
+   ✅ lib/components/player.dart (MODIFICADO)
+      - Lógica de rebote en bordes
+      - Reducción de velocidad (70%)
+      - Eliminación solo si cae muy abajo
+
+═══════════════════════════════════════════════════════════════════════
+
+8. 🚀 CÓMO JUGAR
+   ──────────────
+
+   1. SELECCIONA UN NIVEL
+      • Nivel 1 (Fácil) - Perfecto para principiantes
+      • Nivel 2 (Medio) - Requiere más puntería
+      • Nivel 3 (Difícil) - Para expertos
+      • Aleatorio - Cada vez diferente
+
+   2. DISPARA Y DERRIBA
+      • Arrastra el alien para apuntar
+      • Verás el indicador de poder
+      • Suelta para disparar
+      • Usa los rebotes a tu favor
+
+   3. GANA EL NIVEL
+      • Elimina todos los enemigos
+      • Usa tus disparos sabiamente
+      • Reinicia si es necesario
+      • Vuelve al menú para otro nivel
+
+═══════════════════════════════════════════════════════════════════════
+
+9. 💡 ESTRATEGIAS POR NIVEL
+   ─────────────────────────
+
+   NIVEL 1 (TORRE):
+   • Dispara directo a la base
+   • La torre es inestable
+   • Derriba desde abajo
+
+   NIVEL 2 (PIRÁMIDE):
+   • Apunta al centro
+   • Usa rebotes laterales
+   • Derriba los bloques superiores primero
+
+   NIVEL 3 (FORTALEZA):
+   • Destruye las torres laterales
+   • Usa múltiples disparos
+   • Aprovecha la física de colapso
+   • El metal es más resistente
+
+   ALEATORIO:
+   • Adapta tu estrategia
+   • Observa la estructura
+   • Usa rebotes creativamente
+
+═══════════════════════════════════════════════════════════════════════
+
+10. 🎉 RESULTADO FINAL
+    ──────────────────
+
+    El juego ahora tiene:
+    ✅ 4 niveles únicos
+    ✅ Estructuras tipo Angry Birds
+    ✅ Rebote del alien en bordes
+    ✅ Menú de selección profesional
+    ✅ Navegación completa
+    ✅ Indicadores visuales
+    ✅ 3 niveles de dificultad
+    ✅ Modo aleatorio para variedad
+    ✅ Sistema de reinicio y menú
+    ✅ Interfaz moderna y atractiva
+
+═══════════════════════════════════════════════════════════════════════
+
+🎮 ¡REINICIA LA APP Y DISFRUTA DE LOS NUEVOS NIVELES!
+
+   flutter run
+
+═══════════════════════════════════════════════════════════════════════
+

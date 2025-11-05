@@ -1,0 +1,49 @@
+ARCHIVOS DE AUDIO NECESARIOS
+=============================
+
+Para que el audio funcione correctamente, necesitas agregar los siguientes archivos a esta carpeta:
+
+1. background.mp3 (o background.ogg)
+   - Tipo: Música de fondo
+   - Formato recomendado: MP3 u OGG
+   - Duración: 30-120 segundos (se reproducirá en bucle)
+   - Uso: Se reproduce automáticamente al iniciar el juego
+
+2. gunshot.mp3 (o gunshot.wav / gunshot.ogg)
+   - Tipo: Efecto de sonido
+   - Formato recomendado: MP3, WAV u OGG
+   - Duración: 0.5-2 segundos
+   - Uso: Se reproduce cuando el jugador dispara/lanza
+
+DÓNDE OBTENER SONIDOS GRATUITOS:
+---------------------------------
+- Freesound: https://freesound.org/
+- OpenGameArt: https://opengameart.org/
+- Mixkit: https://mixkit.co/free-sound-effects/
+- ZapSplat: https://www.zapsplat.com/ (requiere registro gratuito)
+
+TÉRMINOS DE BÚSQUEDA:
+----------------------
+Para música de fondo:
+  - "game music loop"
+  - "background music game"
+  - "8bit music"
+  - "space game music"
+
+Para sonido de disparo:
+  - "slingshot sound"
+  - "launch sound"
+  - "cannon shot"
+  - "projectile launch"
+
+NOTA IMPORTANTE:
+----------------
+Mientras no agregues los archivos de audio, verás mensajes en la consola indicando
+que no se pudieron cargar. El juego funcionará normalmente pero sin sonido.
+
+Los mensajes de error se verán así:
+  "AudioManager: Error al inicializar audio: ..."
+  "Asegúrate de que los archivos de audio existen en la carpeta sounds/"
+
+Una vez que agregues los archivos con los nombres correctos, el audio funcionará automáticamente.
+
